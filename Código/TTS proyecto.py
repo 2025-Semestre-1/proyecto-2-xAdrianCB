@@ -44,8 +44,9 @@ ranking = []
 juego_activo = False
 id_caida = None
 """
+inicializa o creacion del tablero y sus bordes
 E:
-S:
+S: matriz
 R:
 
 """
@@ -71,8 +72,9 @@ def inicializar_tablero():
     tablero[centro_y][centro_x+1] = "+"
     tablero[centro_y][centro_x-1] = "+"
 """
+genera piezas de forma aleatoria
 E:
-S:
+S: vectores
 R:
     
 """
@@ -85,6 +87,7 @@ def nueva_pieza():
         "y": 0
     }
 """
+funcion se encaraga de rotar las piezas atraves de la matriz
 E:
 S:
 R:
@@ -111,6 +114,7 @@ def rotar_pieza(pieza):
     pieza["forma"] = forma_original
     return forma_original
 """
+verifica que las pieza sque caen lo atraviesen los bordes y si hay colision las congela
 E:
 S:
 R:
@@ -140,6 +144,7 @@ def unir_pieza(pieza):
                 if 0 <= tablero_y < ALTO_TABLERO and 0 <= tablero_x < ANCHO_TABLERO:
                     tablero[tablero_y][tablero_x] = 1
 """
+se encarga de eliminar las lineas completas en la matriz
 E:
 S:
 R:
@@ -168,6 +173,7 @@ def eliminar_lineas():
                 caer_pieza()
     return lineas_eliminadas
 """
+crea el tablero XD
 E:
 S:
 R:
@@ -202,6 +208,7 @@ def dibujar_pieza_actual():
                 y2 = y1 + TAMANO_BLOQUE
                 lienzo.create_rectangle(x1, y1, x2, y2, fill=pieza_actual["color"], outline=COLOR_BORDE)
 """
+forma la siguiente pieza
 E:
 S:
 R:
@@ -220,6 +227,7 @@ def dibujar_siguiente_pieza():
                 y2 = y1 + TAMANO_BLOQUE
                 lienzo_siguiente.create_rectangle(x1, y1, x2, y2, fill=siguiente_pieza["color"], outline=COLOR_BORDE)
 """
+su funcion es hacer que la pieza baje atraves de la matriz de forma costante
 E:
 S:
 R:
@@ -250,6 +258,7 @@ def caer_pieza():
     if juego_activo:
         id_caida = ventana.after(velocidad_caida, caer_pieza)
 """
+funciones de movimientos atraves d ela matriz
 E:
 S:
 R:
@@ -303,6 +312,7 @@ def iniciar_juego(nuevo_jugador=False):
     dibujar_pieza_actual()
     id_caida = ventana.after(velocidad_caida, caer_pieza)
 """
+guarda puntajes en el ranking
 E:
 S:
 R:
@@ -321,6 +331,7 @@ def guardar_puntaje():
         json.dump(ranking, archivo)
     mostrar_ranking()
 """
+carga el historial de ranking
 E:
 S:
 R:
